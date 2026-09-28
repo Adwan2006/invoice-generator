@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>InvoiceFlow</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="workspace">
+
+    <!-- LEFT SIDEBAR -->
+
+    <aside class="sidebar">
+
+      <div class="sidebar-brand">
+
+        <div class="brand-mark">
+          IF
+        </div>
+
+        <div>
+          <h1>InvoiceFlow</h1>
+          <p>Business documents</p>
+        </div>
+
+      </div>
+
+
+      <div class="sidebar-section">
+
+        <span class="sidebar-label">
+          DOCUMENT TYPE
+        </span>
+
+        <select
+          id="document-type"
+          class="sidebar-select"
+        >
+          <option value="Invoice">
+            Invoice
+          </option>
+
+          <option value="Quote">
+            Quote
+          </option>
+
+          <option value="Estimate">
+            Estimate
+          </option>
+        </select>
+
+      </div>
+
+
+      <div class="sidebar-section">
+
+        <span class="sidebar-label">
+          DOCUMENT INFO
+        </span>
+
+
+        <label>
+          Number
+        </label>
+
+        <input
+          id="invoice-number"
+          type="text"
+          value="INV-1001"
+        >
+
+
+        <label>
+          Issue date
+        </label>
+
+        <input
+          id="invoice-date"
+          type="date"
+        >
+
+
+        <label>
+          Due date
+        </label>
+
+        <input
+          id="due-date"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="sidebar-spacer"></div>
+
+
+      <div class="sidebar-status">
+
+        <span class="status-dot"></span>
+
+        <span id="save-status">
+          Draft saved
+        </span>
+
+      </div>
+
+
+      <button
+        id="print-invoice"
+        class="sidebar-primary"
+      >
+        Export / Print PDF
+      </button>
+
+
+      <button
+        id="reset-invoice"
+        class="sidebar-secondary"
+      >
+        Create New Invoice
+      </button>
+
+    </aside>
+
+
+    <!-- RIGHT WORKSPACE -->
+
+    <main class="main-workspace">
+
+      <div class="workspace-header">
+
+        <div>
+
+          <p class="workspace-eyebrow">
+            DOCUMENT EDITOR
+          </p>
+
+          <h2>Create your invoice</h2>
+
+        </div>
+
+
+        <button
+          id="add-item"
+          class="add-service-button"
+        >
+          + Add service
+        </button>
+
+      </div>
+
+
+      <!-- WHITE INVOICE PAPER -->
+
+      <article class="invoice-paper">
+
+        <!-- PAPER HEADER -->
+
+        <header class="paper-header">
+
+          <div class="company-heading">
+
+            <div class="company-logo-placeholder">
+              IF
+            </div>
+
+            <div>
+
+              <span class="document-label">
+                INVOICE
+              </span>
+
+              <h1>Professional Services</h1>
+
+            </div>
+
+          </div>
+
+
+          <div class="paper-number">
+
+            <span>
+              Document No.
+            </span>
+
+            <strong id="footer-document-number">
+              INV-1001
+            </strong>
+
+          </div>
+
+        </header>
+
+
+        <!-- FROM / CLIENT -->
+
+        <section class="party-section">
+
+          <div class="party">
+
+            <p class="section-label">
+              FROM
+            </p>
+
+            <h3>Your Business</h3>
+
+            <input
+              id="business-name"
+              type="text"
+              placeholder="Apex Digital LLC"
+            >
+
+            <input
+              id="business-email"
+              type="email"
+              placeholder="hello@apexdigital.com"
+            >
+
+            <input
+              id="business-phone"
+              type="text"
+              placeholder="(555) 123-4567"
+            >
+
+            <textarea
+              id="business-address"
+              placeholder="123 Business Ave&#10;Orange County, CA"
+            ></textarea>
+
+          </div>
+
+
+          <div class="party">
+
+            <p class="section-label">
+              BILL TO
+            </p>
+
+            <h3>Client</h3>
+
+            <input
+              id="client-name"
+              type="text"
+              placeholder="John Smith"
+            >
+
+            <input
+              id="client-company"
+              type="text"
+              placeholder="Smith Fitness"
+            >
+
+            <input
+              id="client-email"
+              type="email"
+              placeholder="john@example.com"
+            >
+
+            <textarea
+              id="client-address"
+              placeholder="456 Client Street&#10;Los Angeles, CA"
+            ></textarea>
+
+          </div>
+
+        </section>
+
+
+        <!-- SERVICES -->
+
+        <section class="services-section">
+
+          <div class="paper-section-title">
+
+            <div>
+              <p class="section-label">
+                DETAILS
+              </p>
+
+              <h2>Services</h2>
+            </div>
+
+          </div>
+
+
+          <div class="items-table">
+
+            <div class="item-header">
+
+              <span>Description</span>
+              <span>Quantity</span>
+              <span>Rate</span>
+              <span>Total</span>
+              <span></span>
+
+            </div>
+
+
+            <div id="items-container"></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- BOTTOM -->
+
+        <section class="invoice-bottom">
+
+          <div class="notes-column">
+
+            <div>
+
+              <p class="section-label">
+                NOTES
+              </p>
+
+              <textarea
+                id="notes"
+                placeholder="Thank you for your business."
+              ></textarea>
+
+            </div>
+
+
+            <div>
+
+              <p class="section-label">
+                PAYMENT TERMS
+              </p>
+
+              <textarea
+                id="terms"
+                placeholder="Payment due within 14 days."
+              ></textarea>
+
+            </div>
+
+          </div>
+
+
+          <!-- TOTALS -->
+
+          <div class="totals-panel">
+
+            <div class="total-line">
+
+              <span>Subtotal</span>
+
+              <strong id="subtotal">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div class="percentage-line">
+
+              <span>Tax</span>
+
+              <div>
+
+                <input
+                  id="tax"
+                  type="number"
+                  value="0"
+                  min="0"
+                  step="0.1"
+                >
+
+                <small>%</small>
+
+              </div>
+
+            </div>
+
+
+            <div class="total-line muted-total">
+
+              <span>Tax amount</span>
+
+              <strong id="tax-total">
+                $0.00
+              </strong>
+
+            </div>
+
+
+            <div class="percentage-line">
+
+              <span>Discount</span>
+
+              <div>
+
+                <input
+                  id="discount"
+                  type="number"
+                  value="0"
+                  min="0"
+                  max="100"
+                  step="0.1"
+                >
+
+                <small>%</small>
+
+              </div>
+
+            </div>
+
+
+            <div class="total-line muted-total">
+
+              <span>Discount amount</span>
+
+              <strong id="discount-total">
+                -$0.00
+              </strong>
+
+            </div>
+
+
+            <div class="final-total">
+
+              <span>Total due</span>
+
+              <strong id="grand-total">
+                $0.00
+              </strong>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <footer class="paper-footer">
+
+          <p>
+            Thank you for your business.
+          </p>
+
+          <span>
+            Generated with InvoiceFlow
+          </span>
+
+        </footer>
+
+      </article>
+
+    </main>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
